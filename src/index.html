@@ -2,10 +2,12 @@
 <html lang="en-US">
     <head>
         <meta charset="utf-8">
-        <title>default title</title>
+        <title>Marionette Todo App</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" media="all" href="static/css/styles.css"/>
+        <link rel="stylesheet" type="text/css" media="all" href="static/css/bootstrap.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="static/css/bootstrap-responsive.css" rel="stylesheet">
         <script type="text/javascript" src="static/js/vendor/require.js"></script>
         <script type="text/javascript">
         require(['static/js/common'], function (common) {
@@ -14,6 +16,16 @@
         </script>
     </head>
     <body>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span9 offset3"><h1>TO DO</h1></div>
+            </div>
+            <div class="row-fluid">
+                <div class="span10 offset2">
+                    <h3>Task List</h3>
+                </div>
+            </div>
+        </div>
         <div id="modal"></div>
         <div id="activity"></div>
         <div id="window"></div>
