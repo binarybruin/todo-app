@@ -13,7 +13,7 @@ var MySampleView        = require('app/sample/views').MySampleView;
 var MyModalView         = require('app/sample/views').MyModalView;
 var Model               = require('backbone').Model;
 
-
+var Task = require('app/models/task-model').Task;
 
 var AppController = marionette.Controller.extend({
 
@@ -23,10 +23,12 @@ var AppController = marionette.Controller.extend({
         // You can customize that as necessary.
         this.BUILT();
         this.app = app;
+        var task = new Task();
+        console.log(task.toJSON())
     },
 
     index: function(){
-        
+
 
         /* Ready. Set. Go! */
         // Your Application's Regions are set in the app/app.js
@@ -39,9 +41,9 @@ var AppController = marionette.Controller.extend({
 
         this.app.window.show(new MySampleView({model: model}));
         /* ---------- */
-        
+
     },
-    
+
     // Demo of handling Key Presses
     // Combined with Modal Handling
     keyDown: function(e){
@@ -65,7 +67,7 @@ var AppController = marionette.Controller.extend({
             return true;
         }
     },
-    
+
     BUILT: function(){
 
         // Key Management
