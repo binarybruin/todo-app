@@ -1,21 +1,13 @@
 define(function (require, exports, module) {
 
 var marionette = require('marionette');
-var template = require('hbs!../templates/template');
+
+var templateHeaderTest = require('hbs!app/sample/templates/header-test');
 
 var HeaderView = marionette.ItemView.extend({
-    template : template,
-    ui : {
-
-    },
-    events : {
-
-    },
-    initialize : function(){
-
-    }
+    template : templateHeaderTest
 });
 
-exports.Headeriew = HeaderView;
+exports.HeaderView = HeaderView;
 
 });

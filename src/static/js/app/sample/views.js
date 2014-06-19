@@ -32,8 +32,6 @@ var MyModalView = marionette.ItemView.extend({
     }
 });
 
-
-
 exports.MySampleView = MySampleView;
 exports.MyModalView = MyModalView;
 

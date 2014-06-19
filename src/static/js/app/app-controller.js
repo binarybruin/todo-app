@@ -13,7 +13,19 @@ var MySampleView        = require('app/sample/views').MySampleView;
 var MyModalView         = require('app/sample/views').MyModalView;
 var Model               = require('backbone').Model;
 
-var Task = require('app/models/task-model').Task;
+// TEST /////////////////////////////////////////////////////
+var HeaderView          = require('app/sample/header-itemview').HeaderView;
+var FooterView          = require('app/sample/footer-itemview').FooterView;
+/////////////////////////////////////////////////////////////
+
+// TODO REQUIRES/////////////////////////////////////////////
+var Task                = require('app/todo/models/task-model').Task;
+var TaskList            = require('app/todo/collections/task-collection').TaskList;
+var TaskView            = require('app/todo/views/task-itemview').TaskView;
+var TaskListView        = require('app/todo/views/task-collectionview').TaskListView;
+
+
+/////////////////////////////////////////////////////////////
 
 var AppController = marionette.Controller.extend({
 
@@ -23,8 +35,16 @@ var AppController = marionette.Controller.extend({
         // You can customize that as necessary.
         this.BUILT();
         this.app = app;
-        var task = new Task();
+        /*var task = new Task();
         console.log(task.toJSON())
+        var task_list = new TaskList();
+        console.log(task_list.toJSON())
+        this.app.task.show(new TaskView());*/
+
+        var mockTasks           = [{'status': 'active', 'task_name': 'task1'}, {'status': 'active', 'task_name': 'task2'}];
+        var taskListTest        = new TaskList(mockTasks);
+        app.task_list.show(new TaskListView({taskListTest: taskListTest}));
+        debugger;
     },
 
     index: function(){
@@ -35,14 +55,25 @@ var AppController = marionette.Controller.extend({
         // everything else starts here. (or in another route :)
 
 
-        var model = new Model({
+        /*var model = new Model({
             message: 'Build something! Press Shift + M to display a Modal'
         });
 
-        this.app.window.show(new MySampleView({model: model}));
+        this.app.window.show(new MySampleView({model: model}));*/
         /* ---------- */
 
     },
+
+    // TEST /////////////////////////////////////////////////////
+    test: function(){
+
+        // header footer test
+        console.log("got here")
+        this.app.header.show(new HeaderView());
+        this.app.footer.show(new FooterView());
+
+    },
+    /////////////////////////////////////////////////////////////
 
     // Demo of handling Key Presses
     // Combined with Modal Handling

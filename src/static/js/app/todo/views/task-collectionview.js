@@ -1,5 +1,29 @@
-// define Task CollectionView
+// define TaskList CollectionView
 
+define(function (require, exports, module) {
+
+var marionette = require('marionette');
+var TaskView = require('./task-itemview').ItemView;
+
+var TaskListView =  marionette.CollectionView.extend({
+    itemView : TaskView,
+    itemViewContainer : '#item-container',
+    initialize : function(){
+
+    },
+    ui : {
+
+    },
+    events : {
+
+    }
+});
+
+exports.TaskListView = TaskListView;
+
+});
+
+/*
 TaskListCollectionView = Backbone.Marionette.CollectionView.extend({...});
 
 new TaskListCollectionView({
@@ -18,3 +42,4 @@ new TaskListCollectionView({
 // add filter functions
 
 // add function to clear completed tasks
+*/

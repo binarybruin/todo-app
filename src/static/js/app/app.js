@@ -5,7 +5,11 @@ define(function(require, exports, module) {
     app.addRegions({
         window: '#window',
         modal: '#modal',
-        activity: '#activity'
+        activity: '#activity',
+        header: '#header',
+        footer: '#footer',
+        task: '#task',
+        task_list: '#task_list'
     });
 
     app.addInitializer(function() {
