@@ -19,10 +19,11 @@ var FooterView          = require('app/sample/footer-itemview').FooterView;
 /////////////////////////////////////////////////////////////
 
 // TODO REQUIRES/////////////////////////////////////////////
-var Task                = require('app/todo/models/task-model').Task;
 var TaskList            = require('app/todo/collections/task-collection').TaskList;
 var TaskView            = require('app/todo/views/task-itemview').TaskView;
 var TaskListView        = require('app/todo/views/task-collectionview').TaskListView;
+
+var InputView           = require('app/todo/views/input-itemview').InputView;
 
 
 /////////////////////////////////////////////////////////////
@@ -35,16 +36,20 @@ var AppController = marionette.Controller.extend({
         // You can customize that as necessary.
         this.BUILT();
         this.app = app;
-        /*var task = new Task();
-        console.log(task.toJSON())
-        var task_list = new TaskList();
-        console.log(task_list.toJSON())
-        this.app.task.show(new TaskView());*/
 
-        var mockTasks           = [{'status': 'active', 'task_name': 'task1'}, {'status': 'active', 'task_name': 'task2'}];
-        var taskListTest        = new TaskList(mockTasks);
-        this.app.task_list.show(new TaskListView({collection: taskListTest}));
-        debugger;
+        // create a task list
+        var task_list = new TaskList();
+
+        // create input view and pass collection info
+        this.app.inputview.show(new InputView({
+            collection: task_list
+        }));
+
+        // create task list collectionview
+        this.app.tasks.show(new TaskListView({
+            collection: task_list
+
+        }));
     },
 
     index: function(){
@@ -63,6 +68,10 @@ var AppController = marionette.Controller.extend({
         /* ---------- */
 
     },
+
+    // ADD INPUT ROUTE //////////////////////////////////////////
+
+    /////////////////////////////////////////////////////////////
 
     // TEST /////////////////////////////////////////////////////
     test: function(){

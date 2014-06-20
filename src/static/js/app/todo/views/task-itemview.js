@@ -21,5 +21,3 @@ var TaskView = marionette.ItemView.extend({
 exports.TaskView = TaskView;
 
 });
-
-// add listener function for mouse click on task delete button

@@ -8,8 +8,8 @@ define(function(require, exports, module) {
         activity: '#activity',
         header: '#header',
         footer: '#footer',
-        task: '#task',
-        task_list: '#task-list'
+        tasks: '#tasks',
+        inputview: '#inputview'
     });
 
     app.addInitializer(function() {
