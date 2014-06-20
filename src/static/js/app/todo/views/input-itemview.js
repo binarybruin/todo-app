@@ -22,9 +22,11 @@ var InputView = marionette.ItemView.extend({
 
     wantsCreateTask: function(event) {
         if (event.keyCode == 13) {
-            this.createTask();
+            //only create task if it is not empty
+            if (!(this.ui.input.val()==""))
+                this.createTask();
 
-            // reset input field
+            // reset input field after creating task
             this.ui.input.val("");
         }
     },

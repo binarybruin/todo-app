@@ -77,9 +77,9 @@ var AppController = marionette.Controller.extend({
     test: function(){
 
         // header footer test
-        console.log("got here")
+        /*console.log("got here")
         this.app.header.show(new HeaderView());
-        this.app.footer.show(new FooterView());
+        this.app.footer.show(new FooterView());*/
 
     },
     /////////////////////////////////////////////////////////////
