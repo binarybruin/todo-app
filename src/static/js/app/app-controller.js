@@ -43,7 +43,7 @@ var AppController = marionette.Controller.extend({
 
         var mockTasks           = [{'status': 'active', 'task_name': 'task1'}, {'status': 'active', 'task_name': 'task2'}];
         var taskListTest        = new TaskList(mockTasks);
-        app.task_list.show(new TaskListView({taskListTest: taskListTest}));
+        this.app.task_list.show(new TaskListView({collection: taskListTest}));
         debugger;
     },
 

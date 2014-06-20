@@ -9,7 +9,7 @@ define(function(require, exports, module) {
         header: '#header',
         footer: '#footer',
         task: '#task',
-        task_list: '#task_list'
+        task_list: '#task-list'
     });
 
     app.addInitializer(function() {

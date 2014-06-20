@@ -3,11 +3,10 @@
 define(function (require, exports, module) {
 
 var marionette = require('marionette');
-var TaskView = require('./task-itemview').ItemView;
+var TaskView = require('./task-itemview').TaskView;
 
 var TaskListView =  marionette.CollectionView.extend({
     itemView : TaskView,
-    itemViewContainer : '#item-container',
     initialize : function(){
 
     },
