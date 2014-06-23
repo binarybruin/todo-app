@@ -9,7 +9,8 @@ define(function(require, exports, module) {
         header: '#header',
         footer: '#footer',
         tasks: '#tasks',
-        inputview: '#inputview'
+        inputview: '#inputview',
+        filterview: '#filterview'
     });
 
     app.addInitializer(function() {

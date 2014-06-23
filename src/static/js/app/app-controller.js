@@ -24,6 +24,7 @@ var TaskView            = require('app/todo/views/task-itemview').TaskView;
 var TaskListView        = require('app/todo/views/task-collectionview').TaskListView;
 
 var InputView           = require('app/todo/views/input-itemview').InputView;
+var FilterView          = require('app/todo/views/filter-itemview').FilterView;
 
 
 /////////////////////////////////////////////////////////////
@@ -50,6 +51,9 @@ var AppController = marionette.Controller.extend({
             collection: task_list
 
         }));
+
+        // create filter itemview
+        this.app.filterview.show(new FilterView());
     },
 
     index: function(){
