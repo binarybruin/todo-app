@@ -21,11 +21,9 @@ var FooterView          = require('app/sample/footer-itemview').FooterView;
 // TODO REQUIRES/////////////////////////////////////////////
 var TaskList            = require('app/todo/collections/task-collection').TaskList;
 var TaskView            = require('app/todo/views/task-itemview').TaskView;
-var TaskListView        = require('app/todo/views/task-collectionview').TaskListView;
-
+var TaskListView        = require('app/todo/views/tasks-collectionview').TaskListView;
 var InputView           = require('app/todo/views/input-itemview').InputView;
 var FilterView          = require('app/todo/views/filter-itemview').FilterView;
-
 
 /////////////////////////////////////////////////////////////
 

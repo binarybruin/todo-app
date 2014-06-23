@@ -12,7 +12,8 @@ var InputView = marionette.ItemView.extend({
 
     events : {
         // listen for keypress
-        "keypress" : "wantsCreateTask"
+        "keypress" : "wantsCreateTask",
+        "click .clear_completed_button" : "wantsRemoveCompleted"
     },
 
     /*edit: function() {
@@ -43,6 +44,19 @@ var InputView = marionette.ItemView.extend({
         // set task value
         new_task.set({status: "active", task_name: this.ui.input.val()})
         this.collection.add(new_task)
+    },
+
+    wantsRemoveCompleted: function() {
+        // get completed tasks
+        var completed_tasks = this.collection.where({status: "completed"});
+
+        // remove completed
+        this.collection.remove(completed_tasks);
+
+        // destroy completed
+        completed_tasks.forEach(function(completed_task) {
+            completed_task.destroy()
+        });
     }
 });
 
