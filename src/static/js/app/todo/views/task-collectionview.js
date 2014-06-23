@@ -8,7 +8,7 @@ var TaskView = require('./task-itemview').TaskView;
 var TaskListView =  marionette.CollectionView.extend({
     itemView : TaskView,
     initialize : function(){
-        console.log(this.collection)
+        //console.log(this.collection)
     },
     ui : {
 

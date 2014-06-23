@@ -1,10 +1,16 @@
 <!-- template for Task ItemView -->
 
 <div class="row-fluid" id="tasks">
-    <div class="span3">
-        Status: {{ status }}
+    <div class="span2">
+        Status: <span class="status">{{ status }}</span>
     </div>
-    <div class="span9">
+    <div class="span8">
         Task: {{ task_name }}
+    </div>
+    <div class="span1">
+        <button type="button" class="completed_button">Completed</button>
+    </div>
+    <div class="span1">
+        <button type="button" class="delete_button">Delete</button>
     </div>
 </div>
