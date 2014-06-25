@@ -38,6 +38,7 @@ var AppController = marionette.Controller.extend({
 
         // create a task list
         var task_list = new TaskList();
+        var filter_list = new FilterView();
 
         // create input view and pass collection info
         this.app.inputview.show(new InputView({
@@ -46,12 +47,12 @@ var AppController = marionette.Controller.extend({
 
         // create task list collectionview
         this.app.tasks.show(new TaskListView({
-            collection: task_list
-
+            collection: task_list,
+            filter_list: filter_list
         }));
 
         // create filter itemview
-        this.app.filterview.show(new FilterView());
+        this.app.filterview.show(filter_list);
     },
 
     index: function(){
