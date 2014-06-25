@@ -8,6 +8,12 @@ var InputView = marionette.ItemView.extend({
     template : input_template,
     ui : {
         input: "input"
+
+
+
+
+
+
     },
 
     events : {
