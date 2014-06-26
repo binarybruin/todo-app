@@ -42,7 +42,7 @@ var AppController = marionette.Controller.extend({
 
         // create task list collections for filtered tasks
         //var active_list = new TaskList(task_list.where({status: "active"}));
-        //var completed_list = new TaskList();
+        //var completed_list = new TaskList(task_list.where({status: "completed"}));
 
         // create input view and pass collection info
         this.app.inputview.show(new InputView({
@@ -64,16 +64,18 @@ var AppController = marionette.Controller.extend({
         // create collectionviews for filtered tasks
         var active_list_view = new TaskListView({
             master: task_list,
-            collection: new TaskList(task_list.where({status: "active"})),
+            collection: new TaskList(),
             filter_list: filter_list
         });
         var completed_list_view = new TaskListView({
             master: task_list,
-            collection: new TaskList(task_list.where({status: "completed"})),
+            collection: new TaskList(),
             filter_list: filter_list
         });
 
         this.app.tasks.show(all_list_view);
+        console.log(this.active_list)
+        console.log(this.completed_list)
 
 
         // create filter itemview
