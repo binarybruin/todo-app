@@ -12,12 +12,19 @@ var TaskListView =  marionette.CollectionView.extend({
     initialize : function(options){
         //console.log(this.collection)
         this.filter_list = options.filter_list;
-        this.listenTo(this.filter_list, 'all', this.wantsFilter)
+        this.collection = options.collection;
     },
 
     ui : {
         // filter links
         input: ".all .active .completed"
+    },
+
+    onTaskAdded: function(model) {
+        //if(model.get('status') == "active")
+            //this.active_list.add(model);
+        /*else if (model.get('status') == "completed")
+            this.completed_list.add(model);*/
     },
 
     wantsFilter: function(e) {
@@ -36,8 +43,10 @@ var TaskListView =  marionette.CollectionView.extend({
     },
 
     // get all tasks
-    getAllTasks: function() {
+    getAllTasks: function(view) {
         console.log("clicked all")
+        //this.app.tasks.show(view);
+        //return this.collection;
     },
 
     // get active tasks
@@ -47,12 +56,14 @@ var TaskListView =  marionette.CollectionView.extend({
         return this.collection.filter(function(active_tasks) {
             return
         });*/
+        //return this.active_list;
     },
 
     // get completed tasks
     getCompletedTasks: function() {
         console.log("clicked completed")
         //var completed_tasks = this.collection.where({status: "completed"});
+        //return this.completed_list;
     }
 });
 

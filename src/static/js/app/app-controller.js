@@ -40,16 +40,41 @@ var AppController = marionette.Controller.extend({
         var task_list = new TaskList();
         var filter_list = new FilterView();
 
+        // create task list collections for filtered tasks
+        //var active_list = new TaskList(task_list.where({status: "active"}));
+        //var completed_list = new TaskList();
+
         // create input view and pass collection info
         this.app.inputview.show(new InputView({
             collection: task_list
         }));
 
         // create task list collectionview
-        this.app.tasks.show(new TaskListView({
+        /*this.app.tasks.show(new TaskListView({
             collection: task_list,
             filter_list: filter_list
-        }));
+        }));*/
+
+        var all_list_view = new TaskListView({
+            master: task_list,
+            collection: task_list,
+            filter_list: filter_list
+        })
+
+        // create collectionviews for filtered tasks
+        var active_list_view = new TaskListView({
+            master: task_list,
+            collection: new TaskList(task_list.where({status: "active"})),
+            filter_list: filter_list
+        });
+        var completed_list_view = new TaskListView({
+            master: task_list,
+            collection: new TaskList(task_list.where({status: "completed"})),
+            filter_list: filter_list
+        });
+
+        this.app.tasks.show(all_list_view);
+
 
         // create filter itemview
         this.app.filterview.show(filter_list);
