@@ -37,7 +37,7 @@ var TaskListView =  marionette.CollectionView.extend({
 
     onTaskAdded: function(model) {
         if(model.get("status") == "active") {
-            //this.collection.add(model);
+            this.collection.add(model);
             //console.log(this.collection)
         }
         /*else if (model.get('status') == "completed")
@@ -61,12 +61,12 @@ var TaskListView =  marionette.CollectionView.extend({
                 this.getAllTasks();
                 break;
             case Filters.active:
-                this.active_list = this.collection.where({status: "active"})
                 this.getActiveTasks();
+                this.collection = this.master;
                 break;
             case Filters.completed:
-                this.completed_list = this.collection.where({status: "completed"})
                 this.getCompletedTasks();
+                this.collection = this.master;
                 break;
         }
     },
@@ -75,27 +75,34 @@ var TaskListView =  marionette.CollectionView.extend({
     getAllTasks: function(view) {
         console.log("clicked all")
         console.log(this.master)
-        //this.app.tasks.show(view);
-        //return this.collection;
+
+        return this.master;
     },
 
     // get active tasks
     getActiveTasks: function() {
         console.log("clicked active")
-        console.log(this.active_list)
-        /*active_tasks = this.collection.where({status: "active"});
-        return this.collection.filter(function(active_tasks) {
-            return
-        });*/
-        //return this.active_list;
+
+        var active_list = this.master.where({status: "active"})
+
+        this.collection.set(active_list)
+
+        console.log(this.collection)
+
+        return this.collection;
     },
 
     // get completed tasks
     getCompletedTasks: function() {
         console.log("clicked completed")
-        console.log(this.completed_list)
-        //var completed_tasks = this.collection.where({status: "completed"});
-        //return this.completed_list;
+
+        var completed_list = this.master.where({status: "completed"})
+
+        this.collection.set(completed_list)
+
+        console.log(this.collection)
+
+        return this.collection;
     }
 });
 
