@@ -21,9 +21,8 @@ var FooterView          = require('app/sample/footer-itemview').FooterView;
 // TODO REQUIRES/////////////////////////////////////////////
 var TaskList            = require('app/todo/collections/task-collection').TaskList;
 var TaskView            = require('app/todo/views/task-itemview').TaskView;
-var TaskListView        = require('app/todo/views/tasks-collectionview').TaskListView;
 var InputView           = require('app/todo/views/input-itemview').InputView;
-var FilterView          = require('app/todo/views/filter-itemview').FilterView;
+var TodoLayout          = require('app/todo/views/todo-layout').TodoLayout;
 
 /////////////////////////////////////////////////////////////
 
@@ -37,80 +36,40 @@ var AppController = marionette.Controller.extend({
         this.app = app;
 
         // create a task list
-        var task_list = new TaskList();
-        var filter_list = new FilterView();
-
-        // create task list collections for filtered tasks
-        //var active_list = new TaskList(task_list.where({status: "active"}));
-        //var completed_list = new TaskList(task_list.where({status: "completed"}));
+        this.task_list = new TaskList();
 
         // create input view and pass collection info
         this.app.inputview.show(new InputView({
-            collection: task_list
+            collection: this.task_list
         }));
 
-        // create task list collectionview
-        /*this.app.tasks.show(new TaskListView({
-            collection: task_list,
-            filter_list: filter_list
-        }));*/
-
-        var all_list_view = new TaskListView({
-            master: task_list,
-            collection: task_list,
-            filter_list: filter_list
-        })
-
-        // create collectionviews for filtered tasks
-        var active_list_view = new TaskListView({
-            master: task_list,
-            collection: new TaskList(),
-            filter_list: filter_list
-        });
-        var completed_list_view = new TaskListView({
-            master: task_list,
-            collection: new TaskList(),
-            filter_list: filter_list
-        });
-
-        this.app.tasks.show(all_list_view);
-        console.log(this.active_list)
-        console.log(this.completed_list)
-
-
-        // create filter itemview
-        this.app.filterview.show(filter_list);
     },
 
     index: function(){
-
-
-        /* Ready. Set. Go! */
-        // Your Application's Regions are set in the app/app.js
-        // everything else starts here. (or in another route :)
-
-
-        /*var model = new Model({
-            message: 'Build something! Press Shift + M to display a Modal'
-        });
-
-        this.app.window.show(new MySampleView({model: model}));*/
-        /* ---------- */
-
+        this.showLayout("all");
     },
 
-    // ADD INPUT ROUTE //////////////////////////////////////////
+    filter: function(value){
+        this.showLayout(value);
+    },
 
-    /////////////////////////////////////////////////////////////
+    showLayout: function(value) {
+        // check for malicious input
+        var white_list = {all: "all", active: "active", completed: "completed"};
 
-    // TEST /////////////////////////////////////////////////////
-    test: function(){
+        value = white_list[value] || "all";
 
-        // header footer test
-        /*console.log("got here")
-        this.app.header.show(new HeaderView());
-        this.app.footer.show(new FooterView());*/
+        console.log(value)
 
+        var layout = new TodoLayout({status: value, master: this.task_list});
+
+        //this.listenTo(layout, 'all', this.navigate)
+
+        this.app.tasks.show(layout);
+    },
+
+    navigate: function(e) {
+        //this.app.navigate("/"+e);
     },
     /////////////////////////////////////////////////////////////
 

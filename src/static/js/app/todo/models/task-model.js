@@ -3,6 +3,13 @@
 define(function( require, exports, module ){
 
 var backbone = require('backbone');
+
+var Filters = {
+    all: "all",
+    active: "active",
+    completed: "completed"
+};
+
 var Task = backbone.Model.extend({
     defaults: {
         task_name: "",
@@ -11,5 +18,6 @@ var Task = backbone.Model.extend({
 });
 
 exports.Task = Task;
+exports.Filters = Filters;
 
 });

@@ -5,11 +5,7 @@ define(function (require, exports, module) {
 var marionette = require('marionette');
 var filter_template = require('hbs!../templates/filter-template');
 
-var Filters = {
-    all: "filter:all",
-    active: "filter:active",
-    completed: "filter:completed"
-};
+var Filters = require('../models/task-model').Filters;
 
 var FilterView = marionette.ItemView.extend({
     template : filter_template,
@@ -31,6 +27,5 @@ var FilterView = marionette.ItemView.extend({
 });
 
 exports.FilterView = FilterView;
-exports.Filters = Filters;
 
 });

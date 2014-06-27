@@ -26,6 +26,14 @@ var TaskView = marionette.ItemView.extend({
     bindings : {
         ".status" : "status"
     },
+    serializeData: function() {
+        var data = this.model.toJSON();
+
+        if (data.status == "completed")
+            data.checked = true;
+
+        return data;
+    },
     onShow: function() {
         this.stickit();
     },

@@ -10,8 +10,8 @@ define(function(require, exports, module) {
         footer: '#footer',
         tasks: '#tasks',
         inputview: '#inputview',
-        filterview: '#filterview',
-        filterlist: '.tab-content'
+        filterlist: '.tab-content',
+        tasksleft: '.tasksleft'
     });
 
     app.addInitializer(function() {

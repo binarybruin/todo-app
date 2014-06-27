@@ -8,7 +8,7 @@
         Task: <span contenteditable="false" class="task_text">{{ task_name }}</span>
     </div>
     <div class="span1">
-        <input type="checkbox" class="toggle_complete" name="togglecompl" value="completed">
+        <input type="checkbox" class="toggle_complete" name="togglecompl" value="completed" {{#if checked}}checked{{/if}}>
     </div>
     <div class="span1">
         <button type="button" class="delete_button">Delete</button>

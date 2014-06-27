@@ -17,11 +17,6 @@ var InputView = marionette.ItemView.extend({
         "click .clear_completed_button" : "wantsRemoveCompleted"
     },
 
-    /*edit: function() {
-      //this.$el.addClass("editing");
-      this.input.focus();
-    },*/
-
     wantsCreateTask: function(event) {
         if (event.keyCode == 13) {
             //only create task if it is not empty
