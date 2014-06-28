@@ -6,7 +6,6 @@ var marionette = require('marionette');
 var TaskView = require('./task-itemview').TaskView;
 var TaskList            = require('app/todo/collections/task-collection').TaskList;
 
-
 var TaskListView =  marionette.CollectionView.extend({
     itemView : TaskView,
 
@@ -29,8 +28,6 @@ var TaskListView =  marionette.CollectionView.extend({
         }
         else
             this.collection = this.master;
-
-        //console.log(this.collection.length)
     },
 
     onTaskAdded: function(model) {
@@ -38,13 +35,10 @@ var TaskListView =  marionette.CollectionView.extend({
             this.collection.add(model);
             console.log("task added", model)
         }
-
-        //console.log(this.collection.length)
     },
 
     onTaskRemoved: function(model) {
         console.log("task removed")
-        //console.log(this.collection.length)
     },
 
     onStatusChanged: function(model){
@@ -54,8 +48,6 @@ var TaskListView =  marionette.CollectionView.extend({
         }
         if (model.previousAttributes().status == this.status)
             this.collection.remove(model);
-
-        //console.log(this.collection.length)
     }
 });
 
