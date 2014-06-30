@@ -12,7 +12,6 @@ var FilterView = marionette.ItemView.extend({
 
     ui : {
 
-        span: ".tasksleft"
 
     },
 
