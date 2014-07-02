@@ -6,6 +6,9 @@ var marionette = require('marionette');
 var TaskView = require('./task-itemview').TaskView;
 var TaskList            = require('app/todo/collections/task-collection').TaskList;
 
+var DragAndDropCollectionView = require('vendor/built/ui/views/collection/drag-and-drop').DragAndDropCollectionView;
+var ScrollManager = require('vendor/built/core/managers/scroll').ScrollManager;
+
 var TaskListView =  marionette.CollectionView.extend({
     itemView : TaskView,
 
@@ -14,11 +17,17 @@ var TaskListView =  marionette.CollectionView.extend({
         input: ".all .active .completed"
     },
 
+    events: {
+
+    },
+
     initialize : function(options){
         this.collection = options.collection;
 
         this.master = options.master;
         this.status = options.status;
+
+        DragAndDropCollectionView.prototype.initialize.apply(this, arguments);
 
         if (this.status) {
             this.collection = new TaskList(this.master.where({status: this.status}))
@@ -29,6 +38,7 @@ var TaskListView =  marionette.CollectionView.extend({
         else
             this.collection = this.master;
     },
+
 
     onTaskAdded: function(model) {
         if(model.get("status") == this.status) {
