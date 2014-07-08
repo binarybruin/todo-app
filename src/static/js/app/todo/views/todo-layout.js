@@ -77,7 +77,7 @@ var TodoLayout = marionette.Layout.extend({
 
         this.filterview.show(filterview);
 
-        //console.log(this.tasks)
+        console.log(this.tasks)
         this.showCollection(this._status);
 
         // console.log(this.$el, this.ui);
@@ -106,7 +106,9 @@ var TodoLayout = marionette.Layout.extend({
         // count how many active tasks are left
         var tasks_left = this.master.where({status: "active"});
         var num = tasks_left.length;
+        console.log(num)
         this.ui.taskCount.text(num);
+        console.log(this.ui.taskCount.text());
     }
 });
 

@@ -6,10 +6,10 @@ var marionette = require('marionette');
 var TaskView = require('./task-itemview').TaskView;
 var TaskList            = require('app/todo/collections/task-collection').TaskList;
 
-var DragAndDropCollectionView = require('vendor/built/ui/views/collection/drag-and-drop').DragAndDropCollectionView;
-var ScrollManager = require('vendor/built/core/managers/scroll').ScrollManager;
+//var DragAndDropCollectionView = require('vendor/built/ui/views/collection/drag-and-drop').DragAndDropCollectionView;
+//var ScrollManager = require('vendor/built/core/managers/scroll').ScrollManager;
 
-var TaskListView =  DragAndDropCollectionView.extend({
+var TaskListView =  marionette.CollectionView.extend({
     itemView : TaskView,
 
     ui : {
@@ -22,29 +22,27 @@ var TaskListView =  DragAndDropCollectionView.extend({
     },
 
     initialize : function(options){
-        //this.collection = options.collection;
+        this.collection = options.collection;
 
         this.master = options.master;
         this.status = options.status;
 
-        DragAndDropCollectionView.prototype.initialize.apply(this, arguments);
-
-        this.DragAndDropCollectionView = options.collection;
+        //DragAndDropCollectionView.prototype.initialize.apply(this, arguments);
 
         if (this.status) {
-            this.DragAndDropCollectionView = new TaskList(this.master.where({status: this.status}))
+            this.collection = new TaskList(this.master.where({status: this.status}))
             this.listenTo(this.master, 'add', this.onTaskAdded)
             this.listenTo(this.master, 'remove', this.onTaskRemoved)
             this.listenTo(this.master, 'change:status', this.onStatusChanged)
         }
         else
-            this.DragAndDropCollectionView = this.master;
+            this.collection = this.master;
     },
 
 
     onTaskAdded: function(model) {
         if(model.get("status") == this.status) {
-            this.DragAndDropCollectionView.add(model);
+            this.collection.add(model);
             console.log("task added", model)
         }
     },
@@ -55,11 +53,11 @@ var TaskListView =  DragAndDropCollectionView.extend({
 
     onStatusChanged: function(model){
         if (model.get("status") == this.status) {
-            this.DragAndDropCollectionView.add(model);
+            this.collection.add(model);
             return;
         }
         if (model.previousAttributes().status == this.status)
-            this.DragAndDropCollectionView.remove(model);
+            this.collection.remove(model);
     }
 });
 
