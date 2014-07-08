@@ -59,7 +59,7 @@ var AppController = marionette.Controller.extend({
 
         value = white_list[value] || "all";
 
-        console.log(value)
+        //console.log(value)
 
         var layout = new TodoLayout({status: value, master: this.task_list});
 
