@@ -22,27 +22,29 @@ var TaskListView =  DragAndDropCollectionView.extend({
     },
 
     initialize : function(options){
-        this.collection = options.collection;
+        //this.collection = options.collection;
 
         this.master = options.master;
         this.status = options.status;
 
         DragAndDropCollectionView.prototype.initialize.apply(this, arguments);
 
+        this.DragAndDropCollectionView = options.collection;
+
         if (this.status) {
-            this.collection = new TaskList(this.master.where({status: this.status}))
+            this.DragAndDropCollectionView = new TaskList(this.master.where({status: this.status}))
             this.listenTo(this.master, 'add', this.onTaskAdded)
             this.listenTo(this.master, 'remove', this.onTaskRemoved)
             this.listenTo(this.master, 'change:status', this.onStatusChanged)
         }
         else
-            this.collection = this.master;
+            this.DragAndDropCollectionView = this.master;
     },
 
 
     onTaskAdded: function(model) {
         if(model.get("status") == this.status) {
-            this.collection.add(model);
+            this.DragAndDropCollectionView.add(model);
             console.log("task added", model)
         }
     },
@@ -53,11 +55,11 @@ var TaskListView =  DragAndDropCollectionView.extend({
 
     onStatusChanged: function(model){
         if (model.get("status") == this.status) {
-            this.collection.add(model);
+            this.DragAndDropCollectionView.add(model);
             return;
         }
         if (model.previousAttributes().status == this.status)
-            this.collection.remove(model);
+            this.DragAndDropCollectionView.remove(model);
     }
 });
 
