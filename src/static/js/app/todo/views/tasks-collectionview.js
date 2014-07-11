@@ -37,8 +37,19 @@ var TaskListView =  DragAndDropCollectionView.extend({
         }
         else
             this.collection = this.master;
+
+        // add listeners for dragging and dropping
+        this.listenTo(this.master, 'DragAndDropCollectionView:getDragDataForElement', this.onTaskDragged);
+        this.listenTo(this.master, 'DragAndDropCollectionView:draggingEndedRestoreElementAtPosition', this.onTaskDropped);
     },
 
+    onTaskDragged: function(model) {
+
+    },
+
+    onTaskDropped: function(model) {
+
+    },
 
     onTaskAdded: function(model) {
         if(model.get("status") == this.status) {

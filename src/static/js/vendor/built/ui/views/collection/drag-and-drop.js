@@ -47,7 +47,8 @@ var DragAndDropCollectionView =  marionette.CollectionView.extend({
     },
 
     renderPlaceholderForData: function(){
-        throw 'renderPlaceholderForData Not Implemented';
+        //throw 'renderPlaceholderForData Not Implemented';
+        throw 'task being dragged';
     },
 
     getViewForId: function(id){
