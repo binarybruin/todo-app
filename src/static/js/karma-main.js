@@ -15,6 +15,7 @@ requirejs.config({
     paths:{
         'tests': 'specs',
         'jasmine': 'specs/vendor/jasmine',
+        'helpers': 'specs/vendor/spec-helpers',
     },
 
     shim: {
