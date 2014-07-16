@@ -12,7 +12,8 @@ var TaskView = marionette.ItemView.extend({
     initialize : function(){
     },
     ui : {
-        input: "button .toggle_complete",
+        input: "button",
+        checkbox: ".toggle_complete",
         span: ".task_text"
     },
     events : {

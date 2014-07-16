@@ -13,7 +13,7 @@ var InputView = marionette.ItemView.extend({
 
     events : {
         // listen for keypress
-        "keypress" : "wantsCreateTask",
+        "keypress input" : "wantsCreateTask",
         "click .clear_completed_button" : "wantsRemoveCompleted"
     },
 
