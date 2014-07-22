@@ -4,6 +4,8 @@ define(function(require, exports, module) {
 
     var TaskView = require('app/todo/views/task-itemview').TaskView;
 
+    var TaskListView = require('app/todo/views/tasks-collectionview').TaskListView;
+
     var Task = require('app/todo/models/task-model').Task;
 
     var TaskList = require('app/todo/collections/task-collection').TaskList;
@@ -75,9 +77,9 @@ define(function(require, exports, module) {
             var taskdelete = document.getElementsByClassName("delete_button");
             var position = $(taskdelete).position();
             Events.simulateMouseClick($(taskdelete), position.left, position.top);
-            console.log(task)
+            //console.log(task)
             expect(spy).toHaveBeenCalled();
-            //expect(taskView.).toEqual(undefined);
+            //expect(taskView).toEqual(undefined);
         });
 
     });
