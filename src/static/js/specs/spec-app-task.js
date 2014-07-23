@@ -63,6 +63,7 @@ define(function(require, exports, module) {
             var tasktoggle = document.getElementsByClassName("toggle_complete");
             var position = $(tasktoggle).position();
             Events.simulateMouseClick($(tasktoggle), position.left, position.top);
+            expect(spy).toHaveBeenCalled();
             expect(task.get("status")).toEqual("completed");
             Events.simulateMouseClick($(tasktoggle), position.left, position.top);
             expect(spy).toHaveBeenCalled();

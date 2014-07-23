@@ -37,13 +37,15 @@ define(function(require, exports, module) {
         });
 
         it('when task is added, master/active collection should increase by one', function() {
-            var spy = spyOn(TaskListView.prototype, 'onTaskAdded').and.callThrough();
+            //var spy = spyOn(TaskListView.prototype, 'onTaskAdded').and.callThrough();
             var taskList = new TaskList();
             var taskListView = new TaskListView({collection: taskList});
             region.show(taskListView);
-            taskList.add({task_name: "test"});
+            var task = new Task({task_name: "test"});
+            taskList.add(task);
             console.log(taskList.at(0))
             //expect(spy).toHaveBeenCalled();
+            expect(taskList.length).toEqual(1);
         });
 
         it('when task is removed, all collections should decrease by one', function() {
