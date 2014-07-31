@@ -8,6 +8,7 @@ var tests = [
     'tests/spec-app-header',
     'tests/spec-app-task',
     'tests/spec-app-collection',
+    'tests/spec-app-layout',
 ];
 
 requirejs.config({

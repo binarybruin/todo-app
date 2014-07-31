@@ -10,6 +10,8 @@ define(function(require, exports, module) {
 
     var TaskList = require('app/todo/collections/task-collection').TaskList;
 
+    var FilterView = require('app/todo/views/filter-itemview').FilterView;
+
     var helpers = require('helpers');
     var Events = helpers.Events
 
@@ -27,13 +29,16 @@ define(function(require, exports, module) {
             expect(taskListView).not.toEqual(undefined);
         });
 
+        // FIX TESTS - ADD MASTER COLLECTION (AND LISTENERS?) ////////////////////////////////////////////////////////////
+
         it('create (on initialize) a new collection based on status (click on filter)', function() {
             // create default/active task list
-            var taskListView = new TaskListView({collection: new TaskList()});
-            expect(taskListView).not.toEqual(undefined);
+            var activeListView = new TaskListView({collection: new TaskList(), _status: "active"});
+            expect(activeListView).not.toEqual(undefined);
 
             // create completed task list
-
+            var completedListView = new TaskListView({collection: new TaskList(), _status: "completed"});
+            expect(completedListView).not.toEqual(undefined);
         });
 
         it('when task is added, master/active collection should increase by one', function() {
@@ -43,17 +48,36 @@ define(function(require, exports, module) {
             region.show(taskListView);
             var task = new Task({task_name: "test"});
             taskList.add(task);
-            console.log(taskList.at(0))
             //expect(spy).toHaveBeenCalled();
             expect(taskList.length).toEqual(1);
         });
 
-        it('when task is removed, all collections should decrease by one', function() {
-
+        it('when task is removed, collection should decrease by one', function() {
+            //var spy = spyOn(TaskListView.prototype, 'onTaskRemoved').and.callThrough();
+            var taskList = new TaskList();
+            var taskListView = new TaskListView({collection: taskList});
+            region.show(taskListView);
+            var task = new Task({task_name: "test"});
+            taskList.add(task);
+            expect(taskList.length).toEqual(1);
+            taskList.remove(task);
+            //expect(spy).toHaveBeenCalled();
+            expect(taskList.length).toEqual(0);
         });
 
         it('when task is toggled completed/active, active/completed collections should update (increase/decrease)', function() {
-
+            //var spy = spyOn(TaskListView.prototype, 'onStatusChanged').and.callThrough();
+            var taskList = new TaskList();
+            var taskListView = new TaskListView({collection: taskList, _status: "active"});
+            var completedList = new TaskList();
+            region.show(taskListView);
+            var task = new Task({task_name: "test"});
+            taskList.add(task);
+            expect(taskList.length).toEqual(1);
+            task.set({status: "completed"});
+            taskList.remove(task);
+            completedList.add(task);
+            //expect(spy).toHaveBeenCalled();
         });
 
     });
