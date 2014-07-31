@@ -10,8 +10,6 @@ define(function(require, exports, module) {
 
     var TaskList = require('app/todo/collections/task-collection').TaskList;
 
-    var FilterView = require('app/todo/views/filter-itemview').FilterView;
-
     var helpers = require('helpers');
     var Events = helpers.Events
 
@@ -29,22 +27,11 @@ define(function(require, exports, module) {
             expect(taskListView).not.toEqual(undefined);
         });
 
-        // FIX TESTS - ADD MASTER COLLECTION (AND LISTENERS?) ////////////////////////////////////////////////////////////
-
-        it('create (on initialize) a new collection based on status (click on filter)', function() {
-            // create default/active task list
-            var activeListView = new TaskListView({collection: new TaskList(), _status: "active"});
-            expect(activeListView).not.toEqual(undefined);
-
-            // create completed task list
-            var completedListView = new TaskListView({collection: new TaskList(), _status: "completed"});
-            expect(completedListView).not.toEqual(undefined);
-        });
-
-        it('when task is added, master/active collection should increase by one', function() {
+        // MOVED TO LAYOUT TESTS TO CHECK PARTITIONED COLLECTIONS
+        /*it('when task is added, master/active collection should increase by one', function() {
             //var spy = spyOn(TaskListView.prototype, 'onTaskAdded').and.callThrough();
             var taskList = new TaskList();
-            var taskListView = new TaskListView({collection: taskList});
+            var taskListView = new TaskListView({collection: taskList, master: taskList});
             region.show(taskListView);
             var task = new Task({task_name: "test"});
             taskList.add(task);
@@ -78,7 +65,7 @@ define(function(require, exports, module) {
             taskList.remove(task);
             completedList.add(task);
             //expect(spy).toHaveBeenCalled();
-        });
+        });*/
 
     });
 
