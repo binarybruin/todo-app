@@ -13,7 +13,7 @@ define(function(require, exports, module) {
     var helpers = require('helpers');
     var Events = helpers.Events
 
-    describe('my task view', function() {
+    describe('my tasklist view', function() {
 
         var region;
 

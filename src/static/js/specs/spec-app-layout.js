@@ -19,7 +19,7 @@ define(function(require, exports, module) {
     var helpers = require('helpers');
     var Events = helpers.Events
 
-    describe('my task view', function() {
+    describe('my todo layout', function() {
 
         var region;
 
@@ -48,8 +48,7 @@ define(function(require, exports, module) {
             var allcollection = collections[Filters.all];
             var activecollection = collections[Filters.active];
             var compcollection = collections[Filters.completed];
-            //console.log(allcollection.collection.length)
-            //console.log(collections[Filters.completed])
+
             expect(collections).not.toEqual(undefined);
             expect(allcollection.collection.length).toEqual(3);
             expect(activecollection.collection.length).toEqual(2);
@@ -113,7 +112,7 @@ define(function(require, exports, module) {
             expect(collections[Filters.completed].collection.length).toEqual(1);
         });
 
-        it('check collection is correct on filter click - all', function() {
+        it('check collection is correct on filter click', function() {
             var spy = spyOn(TodoLayout.prototype, 'wantsFilter').and.callThrough();
             var master = new TaskList();
             var todoLayout = new TodoLayout({status: "active", master: master});
@@ -134,6 +133,23 @@ define(function(require, exports, module) {
             //region.show(todoLayout);
             console.log(todoLayout._status)
             //expect(todoLayout._status).toEqual("completed");
+        });
+
+        it('check number of active tasks left', function() {
+            var spy = spyOn(TodoLayout.prototype, 'getActiveLength').and.callThrough();
+            var master = new TaskList();
+            var todoLayout = new TodoLayout({status: "active", master: master});
+            expect(todoLayout).not.toEqual(undefined);
+
+            region.show(todoLayout);
+
+            // add tasks to master and check partitions
+            master.add({task_name: "test1", status: "active"});
+            master.add({task_name: "test2", status: "active"});
+            master.add({task_name: "test3", status: "completed"});
+
+            expect(spy).toHaveBeenCalled();
+            expect(todoLayout.ui.taskCount.text()).toEqual("2");
         });
 
     });
