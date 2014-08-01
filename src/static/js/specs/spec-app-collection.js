@@ -27,45 +27,26 @@ define(function(require, exports, module) {
             expect(taskListView).not.toEqual(undefined);
         });
 
-        // MOVED TO LAYOUT TESTS TO CHECK PARTITIONED COLLECTIONS
-        /*it('when task is added, master/active collection should increase by one', function() {
-            //var spy = spyOn(TaskListView.prototype, 'onTaskAdded').and.callThrough();
-            var taskList = new TaskList();
-            var taskListView = new TaskListView({collection: taskList, master: taskList});
-            region.show(taskListView);
-            var task = new Task({task_name: "test"});
-            taskList.add(task);
-            //expect(spy).toHaveBeenCalled();
-            expect(taskList.length).toEqual(1);
-        });
+        it('task list adding/removing tasks properly', function() {
+            var task1 = new Task({task_name: "test1", status: "active"});
+            var task2 = new Task({task_name: "test2", status: "completed"});
 
-        it('when task is removed, collection should decrease by one', function() {
-            //var spy = spyOn(TaskListView.prototype, 'onTaskRemoved').and.callThrough();
             var taskList = new TaskList();
             var taskListView = new TaskListView({collection: taskList});
+
             region.show(taskListView);
-            var task = new Task({task_name: "test"});
-            taskList.add(task);
+
+            taskList.add(task1);
+            taskList.add(task2);
+
+            expect(taskList.length).toEqual(2);
+
+            taskList.remove(task1);
+
             expect(taskList.length).toEqual(1);
-            taskList.remove(task);
-            //expect(spy).toHaveBeenCalled();
-            expect(taskList.length).toEqual(0);
         });
 
-        it('when task is toggled completed/active, active/completed collections should update (increase/decrease)', function() {
-            //var spy = spyOn(TaskListView.prototype, 'onStatusChanged').and.callThrough();
-            var taskList = new TaskList();
-            var taskListView = new TaskListView({collection: taskList, _status: "active"});
-            var completedList = new TaskList();
-            region.show(taskListView);
-            var task = new Task({task_name: "test"});
-            taskList.add(task);
-            expect(taskList.length).toEqual(1);
-            task.set({status: "completed"});
-            taskList.remove(task);
-            completedList.add(task);
-            //expect(spy).toHaveBeenCalled();
-        });*/
+        // LOOK AT LAYOUT TESTS TO CHECK PARTITIONED COLLECTIONS
 
     });
 

@@ -5,9 +5,9 @@ define(function( require, exports, module ){
 var backbone = require('backbone');
 
 var Filters = {
-    all: "all",
-    active: "active",
-    completed: "completed"
+    all: "filter:all",
+    active: "filter:active",
+    completed: "filter:completed"
 };
 
 var Task = backbone.Model.extend({

@@ -23,6 +23,7 @@ var TaskList            = require('app/todo/collections/task-collection').TaskLi
 var TaskView            = require('app/todo/views/task-itemview').TaskView;
 var InputView           = require('app/todo/views/input-itemview').InputView;
 var TodoLayout          = require('app/todo/views/todo-layout').TodoLayout;
+var Filters             = require('app/todo/models/task-model').Filters;
 
 /////////////////////////////////////////////////////////////
 
@@ -43,6 +44,8 @@ var AppController = marionette.Controller.extend({
             collection: this.task_list
         }));
 
+        this.layout = new TodoLayout({master: this.task_list});
+        this.app.tasks.show(this.layout);
     },
 
     index: function(){
@@ -50,22 +53,8 @@ var AppController = marionette.Controller.extend({
     },
 
     filter: function(value){
-        this.showLayout(value);
-    },
-
-    showLayout: function(value) {
-        // check for malicious input
-        var white_list = {all: "all", active: "active", completed: "completed"};
-
-        value = white_list[value] || "all";
-
-        console.log(value)
-
-        var layout = new TodoLayout({status: value, master: this.task_list});
-
-        //this.listenTo(layout, 'all', this.navigate)
-
-        this.app.tasks.show(layout);
+        value || (value = Filters.all)
+        this.layout.showCollection(value);
     },
 
     navigate: function(e) {

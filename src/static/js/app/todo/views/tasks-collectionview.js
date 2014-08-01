@@ -43,12 +43,12 @@ var TaskListView =  marionette.CollectionView.extend({
     onTaskAdded: function(model) {
         if(model.get("status") == this.status) {
             this.collection.add(model);
-            console.log("task added", model)
+            //console.log("task added", model)
         }
     },
 
     onTaskRemoved: function(model) {
-        console.log("task removed")
+        //console.log("task removed")
     },
 
     onStatusChanged: function(model){

@@ -26,7 +26,7 @@ var TodoLayout = marionette.Layout.extend({
 
     initialize : function(options){
 
-        this._status = options.status || "all";
+        this._status = options.status || Filters.all;
         this.collections = this.generatePartitions(options.master);
         this.master = options.master;
 
@@ -71,31 +71,28 @@ var TodoLayout = marionette.Layout.extend({
     onShow: function() {
         var filterview = this.initFilterView(this.collections);
 
-        this.listenTo(filterview, 'all', this.wantsFilter)
-        this.listenTo(filterview, 'active', this.wantsFilter)
-        this.listenTo(filterview, 'completed', this.wantsFilter)
+        this.listenTo(filterview, Filters.all, this.wantsFilter)
+        this.listenTo(filterview, Filters.active, this.wantsFilter)
+        this.listenTo(filterview, Filters.completed, this.wantsFilter)
 
         this.filterview.show(filterview);
-
-        //console.log(this.tasks)
         this.showCollection(this._status);
-
-        // console.log(this.$el, this.ui);
-        // debugger;
     },
 
-    wantsFilter: function(e) {
-        this.trigger(e)
-        this.showCollection(e);
+    wantsFilter: function(view) {
+        this.showCollection(view.currentFilter);
     },
 
     showCollection: function(value) {
         // check valid filter input
         var collection = this.collections[value];
-
         // if input is nonsense, set default filter ALL
-        if (!collection)
-            collection = this.collections[Filters.all];
+        if (!collection){
+            value = Filters.all
+            collection = this.collections[value];
+        }
+
+        this._status = value;
 
         // show collection view
         this.tasks.show(collection, {preventClose:true});
@@ -104,11 +101,9 @@ var TodoLayout = marionette.Layout.extend({
 
     getActiveLength: function() {
         // count how many active tasks are left
-        var tasks_left = this.master.where({status: "active"});
-        var num = tasks_left.length;
-        //console.log(num)
+        var num = this.collections[Filters.active].collection.length;
         this.ui.taskCount.text(num);
-        //console.log(this.ui.taskCount.text());
+        //console.log(num)
     }
 });
 

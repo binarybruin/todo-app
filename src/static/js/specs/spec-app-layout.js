@@ -92,7 +92,6 @@ define(function(require, exports, module) {
             collections = todoLayout.generatePartitions(master);
             expect(spy).toHaveBeenCalled();
             region.show(todoLayout);
-            //console.log(collections[Filters.active].collection.length)
             expect(collections[Filters.all].collection.length).toEqual(0);
             expect(collections[Filters.active].collection.length).toEqual(0);
         });
@@ -112,27 +111,51 @@ define(function(require, exports, module) {
             expect(collections[Filters.completed].collection.length).toEqual(1);
         });
 
-        it('check collection is correct on filter click', function() {
+        it('check collection is correct on filter click', function(done) {
             var spy = spyOn(TodoLayout.prototype, 'wantsFilter').and.callThrough();
+
             var master = new TaskList();
-            var todoLayout = new TodoLayout({status: "active", master: master});
-            expect(todoLayout).not.toEqual(undefined);
-
-            region.show(todoLayout);
-
-            // add tasks to master and check partitions
             master.add({task_name: "test1", status: "active"});
             master.add({task_name: "test2", status: "active"});
             master.add({task_name: "test3", status: "completed"});
-            //region.show(todoLayout);
 
-            var allFilter = document.getElementsByClassName("all");
-            var position = $(allFilter).position();
-            Events.simulateMouseClick($(allFilter), position.left, position.top);
-            expect(spy).toHaveBeenCalled();
-            //region.show(todoLayout);
-            console.log(todoLayout._status)
-            //expect(todoLayout._status).toEqual("completed");
+            var todoLayout = new TodoLayout({master: master});
+            expect(todoLayout).not.toEqual(undefined);
+            region.show(todoLayout);
+
+            region.show(todoLayout);
+            todoLayout.showCollection(Filters.all);
+
+            var activeFilter = $(".active");
+            var position = activeFilter.position();
+
+            activeFilter.trigger("click");
+
+            setTimeout(function(){
+                expect(spy).toHaveBeenCalled();
+                expect(todoLayout._status).toBe(Filters.active);
+                done();
+            }, 0);
+
+        });
+
+        it('check collection is Filters.all on bad filter', function() {
+
+            var master = new TaskList();
+            master.add({task_name: "test1", status: "active"});
+            master.add({task_name: "test2", status: "active"});
+            master.add({task_name: "test3", status: "completed"});
+
+            var todoLayout = new TodoLayout({master: master});
+            expect(todoLayout).not.toEqual(undefined);
+            region.show(todoLayout);
+
+            region.show(todoLayout);
+            todoLayout.filterview.currentView.currentFilter = "bananas";
+            todoLayout.wantsFilter(todoLayout.filterview.currentView);
+
+            expect(todoLayout._status).toBe(Filters.all);
+
         });
 
         it('check number of active tasks left', function() {
@@ -143,7 +166,6 @@ define(function(require, exports, module) {
 
             region.show(todoLayout);
 
-            // add tasks to master and check partitions
             master.add({task_name: "test1", status: "active"});
             master.add({task_name: "test2", status: "active"});
             master.add({task_name: "test3", status: "completed"});
