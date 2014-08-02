@@ -131,6 +131,7 @@ define(function(require, exports, module) {
 
             activeFilter.trigger("click");
 
+            // add asynchronous testing since events like clicks are queued up for after other synchronous functions are called
             setTimeout(function(){
                 expect(spy).toHaveBeenCalled();
                 expect(todoLayout._status).toBe(Filters.active);
