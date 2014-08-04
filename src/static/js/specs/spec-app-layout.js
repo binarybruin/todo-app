@@ -87,13 +87,21 @@ define(function(require, exports, module) {
             expect(collections[Filters.all].collection.length).toEqual(1);
             expect(collections[Filters.active].collection.length).toEqual(1);
 
-
             master.remove(task);
             collections = todoLayout.generatePartitions(master);
             expect(spy).toHaveBeenCalled();
             region.show(todoLayout);
             expect(collections[Filters.all].collection.length).toEqual(0);
             expect(collections[Filters.active].collection.length).toEqual(0);
+
+            task.set({status: "completed"});
+            master.add(task);
+            expect(collections[Filters.all].collection.length).toEqual(1);
+            expect(collections[Filters.completed].collection.length).toEqual(1);
+
+            master.remove(task);
+            expect(collections[Filters.all].collection.length).toEqual(0);
+            expect(collections[Filters.completed].collection.length).toEqual(0);
         });
 
         it('when task is toggled completed/active, active/completed collections should update (increase/decrease)', function() {
