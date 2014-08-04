@@ -5,5 +5,5 @@ dist
 .settings
 .coverage
 collected-static/
-#*.css
+*.css
 .sass-cache
