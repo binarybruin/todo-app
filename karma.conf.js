@@ -4,14 +4,14 @@ module.exports = function(config) {
     frameworks: ['jasmine', 'requirejs'],
 
     files: [
-        {pattern: 'src/static/js/common.js', included: true},
-        {pattern: 'src/static/js/app/**/*.js', included: false},
-        {pattern: 'src/static/js/app/**/*.html', included: false},
-        {pattern: 'src/static/js/vendor/**/*.js', included: false, served: true},
-        {pattern: 'src/static/js/specs/**/*.js', included: false, served: true},
-        {pattern: 'src/static/js/specs/**/*.html', included: false, served: true},
+        {pattern: 'project/static/js/common.js', included: true},
+        {pattern: 'project/static/js/todo_django/**/*.js', included: false},
+        {pattern: 'project/static/js/todo_django/**/*.html', included: false},
+        {pattern: 'project/static/js/vendor/**/*.js', included: false, served: true},
+        {pattern: 'project/static/js/specs/**/*.js', included: false, served: true},
+        {pattern: 'project/static/js/specs/**/*.html', included: false, served: true},
 
-        'src/static/js/karma-main.js'
+        'project/static/js/karma-main.js'
     ],
 
     reporters: ['dots'],
