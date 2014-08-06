@@ -5,6 +5,9 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 
+from tastypie.api import Api
+from todo.api import TaskResource
+
 admin.autodiscover()
 
 urlpatterns = patterns(
