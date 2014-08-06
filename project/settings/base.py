@@ -220,6 +220,9 @@ ROOT_URLCONF = '%s.urls' % SITE_NAME
 ########## END URL CONFIGURATION
 
 
+TASTYPIE_DEFAULT_FORMATS = ['json']
+
+
 ########## APP CONFIGURATION
 DJANGO_APPS = (
     'grappelli',

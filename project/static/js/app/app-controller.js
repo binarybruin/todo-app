@@ -38,8 +38,8 @@ var AppController = marionette.Controller.extend({
 
         // create a task list
         this.task_list = new TaskList();
-        task_list.url = '/task_list/';
-        task_list.fetch();
+        this.task_list.url = '/api/v1/task/';
+        this.task_list.fetch();
 
         // create input view and pass collection info
         this.app.inputview.show(new InputView({

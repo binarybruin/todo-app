@@ -7,16 +7,12 @@ var Task = require('../models/task-model').Task;
 
 var TaskList =  backbone.Collection.extend({
     //urlRoot: '/api/v1/auction_item/',
+    url: '/api/v1/task/',
     model: Task,
 
-    // get active tasks
-    getActiveTasks: function() {
-
-    },
-
-    // get completed tasks
-    getCompletedTasks: function() {
-
+    // parse function to override Backbone's when collection.fetch() is called
+    parse: function(data) {
+        return data.objects;
     }
 });
 

@@ -31,7 +31,7 @@ var TaskListView =  marionette.CollectionView.extend({
 
         if (this.status) {
             this.collection = new TaskList(this.master.where({status: this.status}))
-            this.collection.url = '/task_list/';
+            this.collection.url = '/api/v1/task/';
             this.collection.fetch();
 
             this.listenTo(this.master, 'add', this.onTaskAdded)
